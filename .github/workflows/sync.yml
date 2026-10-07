@@ -1,0 +1,40 @@
+name: Sync
+
+# Rebuilds the [catvinci] repository whenever an app's release CI pushes a
+# new packages/<pkgname>.json (see scripts/sync.sh). Run by hand to retry.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packages/**"
+      - "scripts/**"
+      - "catvinci.asc"
+      - ".github/workflows/sync.yml"
+  workflow_dispatch:
+
+# One run at a time: two runs that both read catvinci.db and then upload it
+# would lose one of the two updates.
+concurrency:
+  group: sync
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    container: archlinux:base-devel
+    steps:
+      - name: Install tools
+        run: pacman -Syu --noconfirm --needed git github-cli jq
+
+      - uses: actions/checkout@v4
+
+      - name: Sync catvinci.db
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ARCH_REPO_GPG_KEY: ${{ secrets.ARCH_REPO_GPG_KEY }}
+        run: scripts/sync.sh
