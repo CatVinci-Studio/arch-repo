@@ -10,6 +10,7 @@ on:
       - "packages/**"
       - "scripts/**"
       - "catvinci.asc"
+      - "install.sh"
       - ".github/workflows/sync.yml"
   workflow_dispatch:
 

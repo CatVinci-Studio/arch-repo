@@ -8,27 +8,28 @@ Signed Arch Linux packages for CatVinci Studio apps.
 
 ## Use
 
-Do these steps once. After that, `sudo pacman -Syu` keeps the packages up
-to date.
+Run once. After that, `sudo pacman -Syu` keeps the packages up to date.
 
-1. Trust the signing key:
+```sh
+bash <(curl -fsSL https://raw.githubusercontent.com/CatVinci-Studio/arch-repo/main/install.sh) levis-bin
+```
 
-   ```sh
-   curl -fsSL https://raw.githubusercontent.com/CatVinci-Studio/arch-repo/main/catvinci.asc | sudo pacman-key --add -
-   sudo pacman-key --lsign-key B1B82E95327C63CCD15790F0B66D200DBA450FBC
-   ```
+[`install.sh`](install.sh) checks the signing key's fingerprint
+(`B1B82E95327C63CCD15790F0B66D200DBA450FBC`), trusts it, adds `[catvinci]` to
+`/etc/pacman.conf`, and installs the packages you name. Leave out the
+package names to only set up the repository.
 
-2. Add the repository to `/etc/pacman.conf`:
+<details>
+<summary>The same steps by hand</summary>
 
-   ```sh
-   printf '\n[catvinci]\nServer = https://github.com/CatVinci-Studio/arch-repo/releases/download/$arch\n' | sudo tee -a /etc/pacman.conf
-   ```
+```sh
+curl -fsSL https://raw.githubusercontent.com/CatVinci-Studio/arch-repo/main/catvinci.asc | sudo pacman-key --add -
+sudo pacman-key --lsign-key B1B82E95327C63CCD15790F0B66D200DBA450FBC
+printf '\n[catvinci]\nServer = https://github.com/CatVinci-Studio/arch-repo/releases/download/$arch\n' | sudo tee -a /etc/pacman.conf
+sudo pacman -Syu levis-bin
+```
 
-3. Install a package, for example Levis:
-
-   ```sh
-   sudo pacman -Syu levis-bin
-   ```
+</details>
 
 ## How it works
 
@@ -38,7 +39,7 @@ to date.
   `packages/<pkgname>.json` (version, URL, sha256) here with a deploy key.
 - `.github/workflows/sync.yml` then downloads the package, checks its sha256
   and its pkgname, signs it, updates `catvinci.db`, and downloads every
-  package once more through pacman to check the result.
+  package once more through pacman, after setting up with `install.sh`.
 
 ## Add an app
 
@@ -67,6 +68,6 @@ to date.
 - Private key: only the `ARCH_REPO_GPG_KEY` secret of this repository.
 
 To replace it, store a new passphrase-less key in `ARCH_REPO_GPG_KEY`,
-replace `catvinci.asc` and the fingerprint above, delete the `catvinci.db*`
+replace `catvinci.asc` and the fingerprint above and in `install.sh`, delete the `catvinci.db*`
 and `catvinci.files*` assets, and run the Sync workflow. Users must then
 repeat step 1.

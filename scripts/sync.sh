@@ -19,7 +19,6 @@ set -euo pipefail
 repo=catvinci
 tag=x86_64
 root="$(cd "$(dirname "$0")/.." && pwd)"
-server="https://github.com/${GH_REPO}/releases/download/${tag}"
 
 export GNUPGHOME="$(mktemp -d)"
 printf '%s\n' "${ARCH_REPO_GPG_KEY:?ARCH_REPO_GPG_KEY is not set}" | gpg --batch --import
@@ -91,14 +90,11 @@ else
     done
 fi
 
-# Install path check: trust the key, add the repository, and download and
-# verify every package, as a user's pacman would.
+# Install path check: set up the repository with install.sh, the script
+# users run, then download and verify every package as their pacman would.
 pacman-key --init >/dev/null
-pacman-key --add "$root/catvinci.asc"
-pacman-key --lsign-key "$key"
-printf '\n[%s]\nServer = %s\n' "$repo" "$server" >>/etc/pacman.conf
 for attempt in 1 2 3 4 5; do
-  pacman -Sy && break
+  "$root/install.sh" && break
   sleep 10
 done
 pacman -Sw --noconfirm $(pacman -Slq "$repo")
