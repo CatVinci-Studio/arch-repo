@@ -1,6 +1,6 @@
 {
   "name": "levis-bin",
-  "version": "0.9.2-1",
-  "url": "https://github.com/CatVinci-Studio/Levis/releases/download/v0.9.2/levis-bin-0.9.2-1-x86_64.pkg.tar.zst",
-  "sha256": "d5cc0607ea5070728bf2ff4b717f1d9fa00dd1ddfa4487343f7eec9c8caa4ebb"
+  "version": "0.9.3-1",
+  "url": "https://github.com/CatVinci-Studio/Levis/releases/download/v0.9.3/levis-bin-0.9.3-1-x86_64.pkg.tar.zst",
+  "sha256": "b3c4eaefad3d648809fabcdfdd36d4180e9daaf749b777da6a51c73a86b2b112"
 }
