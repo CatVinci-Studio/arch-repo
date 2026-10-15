@@ -2,7 +2,7 @@
 # Sets up the CatVinci Studio pacman repository [catvinci] and, optionally,
 # installs packages from it:
 #
-#   bash <(curl -fsSL https://raw.githubusercontent.com/CatVinci-Studio/arch-repo/main/install.sh) levis-bin
+#   bash <(curl -fsSL https://raw.githubusercontent.com/CatVinci-Studio/arch-repo/main/install.sh) textus-bin
 #
 # 1. Downloads the signing key and checks its fingerprint against the one
 #    below before pacman trusts it.
@@ -48,5 +48,5 @@ if [ "$#" -gt 0 ]; then
   $sudo pacman -Syu "$@"
 else
   $sudo pacman -Sy
-  echo ":: Done. Install packages with: sudo pacman -S levis-bin"
+  echo ":: Done. Install packages with: sudo pacman -S textus-bin"
 fi

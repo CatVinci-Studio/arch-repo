@@ -2,16 +2,23 @@
 
 Signed Arch Linux packages for CatVinci Studio apps.
 
-| Package     | App                                                     |
-| ----------- | ------------------------------------------------------- |
-| `levis-bin` | [Levis](https://github.com/CatVinci-Studio/Levis), AI-native WYSIWYG Markdown editor |
+| Package      | App                                                                     |
+| ------------ | ----------------------------------------------------------------------- |
+| `textus-bin` | [Textus](https://github.com/CatVinci-Studio/Textus), AI-native WYSIWYG Markdown editor |
+| `levis-bin`  | Levis, Textus's name before 1.0.0. Its last release is 0.9.8; `textus-bin` replaces it. |
+
+Levis was renamed Textus at 1.0.0. With `levis-bin` installed,
+`sudo pacman -Syu` offers to replace it with `textus-bin`
+(`replaces=('levis-bin')`). Levis's settings stay in
+`~/.config/com.chengaoshen.levis`, and Textus offers to import them on its
+first start.
 
 ## Use
 
 Run once. After that, `sudo pacman -Syu` keeps the packages up to date.
 
 ```sh
-bash <(curl -fsSL https://raw.githubusercontent.com/CatVinci-Studio/arch-repo/main/install.sh) levis-bin
+bash <(curl -fsSL https://raw.githubusercontent.com/CatVinci-Studio/arch-repo/main/install.sh) textus-bin
 ```
 
 [`install.sh`](install.sh) checks the signing key's fingerprint
@@ -26,7 +33,7 @@ package names to only set up the repository.
 curl -fsSL https://raw.githubusercontent.com/CatVinci-Studio/arch-repo/main/catvinci.asc | sudo pacman-key --add -
 sudo pacman-key --lsign-key B1B82E95327C63CCD15790F0B66D200DBA450FBC
 printf '\n[catvinci]\nServer = https://github.com/CatVinci-Studio/arch-repo/releases/download/$arch\n' | sudo tee -a /etc/pacman.conf
-sudo pacman -Syu levis-bin
+sudo pacman -Syu textus-bin
 ```
 
 </details>
@@ -59,7 +66,7 @@ sudo pacman -Syu levis-bin
    }
    ```
 
-   Levis does this in the `update-arch-repo` job of its `release.yml`.
+   Textus does this in the `update-arch-repo` job of its `release.yml`.
 
 ## Signing key
 
