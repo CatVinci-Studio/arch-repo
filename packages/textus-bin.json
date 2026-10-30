@@ -1,6 +1,6 @@
 {
   "name": "textus-bin",
-  "version": "1.2.9-1",
-  "url": "https://github.com/CatVinci-Studio/Textus/releases/download/v1.2.9/textus-bin-1.2.9-1-x86_64.pkg.tar.zst",
-  "sha256": "7d5b55b2e2626ab83fee0b3028edb11b2bc615f1d79d269854de38322550b495"
+  "version": "1.2.10-1",
+  "url": "https://github.com/CatVinci-Studio/Textus/releases/download/v1.2.10/textus-bin-1.2.10-1-x86_64.pkg.tar.zst",
+  "sha256": "3362c6d6a5777d30014c4c514638a53c994d8df20dfdab06fa63bc83def266b1"
 }
